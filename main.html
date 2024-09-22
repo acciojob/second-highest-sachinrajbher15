@@ -1,29 +1,37 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
 	<link rel="stylesheet" href="styles.css">
 </head>
 
-<body>	
+<body>
 	<script>
 		function secondHighest(arr) {
-			//Write your code here
-			if(arr.length > 1){
-				arr.sort();
-				return arr[arr.length-2];
-			}
-			else{
+			if (arr.length < 2) {
 				return -Infinity;
 			}
+
+			// Use a Set to remove duplicates
+			const uniqueElements = Array.from(new Set(arr));
+
+			// If there are less than 2 unique elements, return -Infinity
+			if (uniqueElements.length < 2) {
+				return -Infinity;
+			}
+
+			// Sort the unique elements in descending order
+			uniqueElements.sort((a, b) => b - a);
+
+			// Return the second highest element
+			return uniqueElements[1];
 		}
 
 		function Main() {
 			var n = prompt("Enter the number of elements");
 			var arr = [];
 			for (var i = 0; i < n; i++) {
-				arr[i] = prompt("Enter element " + (i+1));
+				arr[i] = parseInt(prompt("Enter element " + (i + 1)), 10);
 			}
 			alert(secondHighest(arr));
 		}
@@ -31,8 +39,7 @@
 	</script>
 
     <script type="text/javascript" src="./script.js">
-</script>
+	</script>
 
 </body>
-
 </html>
